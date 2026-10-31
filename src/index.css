@@ -1,0 +1,156 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #ffffff;
+  --bg-gradient: linear-gradient(180deg, #f9f9fc 0%, #fffcf7 52%, #fbf7f2 100%);
+  --surface: rgba(255, 255, 255, 0.78);
+  --surface-strong: rgba(255, 255, 255, 0.95);
+  --surface-muted: #f1f1f6;
+  --ink: #122d45;
+  --ink-2: #334155;
+  --muted: #5f5a75;
+  --subtle: #8a849c;
+  --border: rgba(18, 45, 69, 0.12);
+  --border-strong: rgba(25, 53, 77, 0.5);
+  --accent: #122d45;
+  --accent-ink: #ffffff;
+  --accent-hover: #1061a6;
+  --focus: #85b1ed;
+  --success: #1a8047;
+  --danger: #ba2b4c;
+  --warn: #9a6200;
+  --shadow: 0 8px 30px rgba(18, 45, 69, 0.08);
+}
+
+.dark {
+  --bg: #0d1b2f;
+  --bg-gradient: linear-gradient(180deg, #0d1b2f 0%, #0d1b2f 58%, #122d45 100%);
+  --surface: rgba(255, 255, 255, 0.07);
+  --surface-strong: rgba(255, 255, 255, 0.12);
+  --surface-muted: #1f2f44;
+  --ink: #f9faf3;
+  --ink-2: #e3ecf9;
+  --muted: #cbd5e1;
+  --subtle: #94a3b8;
+  --border: rgba(255, 255, 255, 0.12);
+  --border-strong: rgba(203, 219, 242, 0.55);
+  --accent: #acc6e9;
+  --accent-ink: #0d1b2f;
+  --accent-hover: #cbdbf2;
+  --focus: #85b1ed;
+  --success: #8dd89f;
+  --danger: #e86d7a;
+  --warn: #f0c46c;
+  --shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'DM Sans', sans-serif;
+  min-height: 100dvh;
+  color: var(--ink);
+  background: var(--bg);
+  background-image: var(--bg-gradient);
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+}
+
+.display {
+  font-family: 'Space Grotesk', sans-serif;
+  letter-spacing: -0.03em;
+}
+.mono {
+  font-family: 'JetBrains Mono', Menlo, monospace;
+}
+
+@layer components {
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    @apply rounded-3xl;
+  }
+  .inner {
+    background: var(--surface-muted);
+    border: 1px solid var(--border);
+    @apply rounded-2xl;
+  }
+  .field {
+    background: var(--surface-muted);
+    border: 1px solid var(--border);
+    color: var(--ink);
+    @apply min-h-[44px] w-full rounded-2xl px-3.5 py-2.5 text-sm outline-none transition-colors;
+  }
+  .field::placeholder {
+    color: var(--subtle);
+  }
+  .field:focus {
+    border-color: var(--focus);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--focus) 30%, transparent);
+  }
+  .btn {
+    @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded-2xl px-4 py-2.5 text-sm font-semibold transition-all active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-40;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: var(--accent-ink);
+  }
+  .btn-primary:not(:disabled):hover {
+    filter: brightness(1.08);
+  }
+  .btn-ghost {
+    background: var(--surface-muted);
+    color: var(--ink);
+    border: 1px solid var(--border);
+  }
+  .btn-ghost:not(:disabled):hover {
+    border-color: var(--border-strong);
+  }
+  .btn-danger {
+    background: color-mix(in srgb, var(--danger) 14%, transparent);
+    color: var(--danger);
+  }
+  .chip {
+    border: 1px solid var(--border);
+    color: var(--muted);
+    @apply inline-flex min-h-[32px] items-center gap-1 rounded-full px-3 text-xs font-semibold transition-colors;
+  }
+  .chip[data-active='true'] {
+    background: var(--accent);
+    color: var(--accent-ink);
+    border-color: var(--accent);
+  }
+  .label {
+    color: var(--subtle);
+    @apply mb-1.5 block text-[11px] font-semibold uppercase tracking-[0.08em];
+  }
+  .skeleton {
+    background: linear-gradient(90deg, var(--surface-muted), var(--surface-strong), var(--surface-muted));
+    background-size: 200% 100%;
+    animation: shimmer 1.4s infinite linear;
+    @apply rounded-xl;
+  }
+}
+
+@keyframes shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+  }
+}

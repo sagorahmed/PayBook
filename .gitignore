@@ -1,0 +1,28 @@
+# Secrets and local environment (never commit)
+.env
+.env.*
+!.env.example
+.circle/
+recovery_file*
+*.pem
+*.key
+
+# Dependencies and build output
+node_modules/
+dist/
+.vite/
+contracts/out/
+contracts/cache/
+cache/
+out/
+broadcast/
+
+# Arc Studio runtime logs
+traces.jsonl
+console.jsonl
+*.log
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
